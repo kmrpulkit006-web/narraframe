@@ -1,0 +1,37 @@
+.storyboard-viewer{
+
+    margin-top:40px;
+
+    display:flex;
+
+    justify-content:center;
+}
+
+.viewer-card{
+
+    width:min(950px,90%);
+
+    padding:40px;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+
+    text-align:center;
+}
+
+.viewer-card h2{
+
+    font-size:36px;
+
+    margin-bottom:12px;
+}
+
+.viewer-card p{
+
+    color:#bdbdbd;
+}

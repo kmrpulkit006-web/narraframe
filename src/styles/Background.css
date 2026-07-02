@@ -1,0 +1,45 @@
+.orb{
+
+    position:fixed;
+
+    border-radius:50%;
+
+    filter:blur(100px);
+
+    opacity:.25;
+
+    z-index:-1;
+}
+
+.orb1{
+
+    width:420px;
+    height:420px;
+
+    background:#7C3AED;
+
+    top:120px;
+    left:-120px;
+}
+
+.orb2{
+
+    width:340px;
+    height:340px;
+
+    background:#06B6D4;
+
+    right:-80px;
+    top:280px;
+}
+
+.orb3{
+
+    width:260px;
+    height:260px;
+
+    background:#3B82F6;
+
+    bottom:-80px;
+    left:45%;
+}
