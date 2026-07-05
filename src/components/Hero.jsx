@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import "./../styles/Hero.css";
+import { useState } from "react";
 
 function Hero() {
+    const [showDemoNote, setShowDemoNote] = useState(false);
     return (
         <section className="hero">
 
@@ -22,8 +24,9 @@ function Hero() {
                 transition={{ delay: 0.2, duration: 0.8 }}
             >
                 Turn Stories Into
-                <span> Turn Stories Into
-                    Cinematic Storyboards</span>
+                <span> 
+                    Cinematic Storyboards
+                </span>
             </motion.h1>
 
             <motion.p
@@ -58,10 +61,22 @@ function Hero() {
                     🚀 Start Creating
 
                 </button>
-                <button className="secondary-btn">
+                <button
+                    className="secondary-btn"
+                    onClick={() => {
+                        setShowDemoNote(true);
+                        setTimeout(() => setShowDemoNote(false), 2500);
+                    }}
+                >
                     🎥 Watch Demo
                 </button>
             </motion.div>
+
+            {showDemoNote && (
+                <p style={{ marginTop: "16px", color: "#94a3b8", fontSize: "14px" }}>
+                    Demo video coming soon!
+                </p>
+            )}
 
         </section>
     );

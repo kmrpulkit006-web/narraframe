@@ -133,21 +133,11 @@ function ResultsDashboard({ onOpenStoryboard }) {
                 ))}
 
             </div>
-            <div className="story-card">
-
-            </div>
-
-            <div className="preview-card">
-
-            </div>
-
             <button
-                className="open-button"
+                className="export-btn"
                 onClick={() => navigate("/viewer")}
             >
-
                 🚀 Open Storyboard
-
             </button>
 
         </motion.section>

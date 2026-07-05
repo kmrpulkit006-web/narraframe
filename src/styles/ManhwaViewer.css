@@ -1,0 +1,287 @@
+.viewer {
+    display: flex;
+    min-height: 100vh;
+    background: #0f172a;
+    color: white;
+}
+
+.sidebar{
+    width:260px;
+    padding:30px;
+    background:#111827;
+    border-right:1px solid rgba(255,255,255,.08);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+    color: #8b5cf6;
+}
+
+.scene {
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, .04);
+    transition: .3s;
+}
+
+.scene:hover {
+    background: rgba(139, 92, 246, .18);
+}
+
+.back-btn {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 25px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .08);
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.back-btn:hover {
+    background: #8b5cf6;
+    transform: translateX(-4px);
+}
+
+.workspace {
+    flex: 1;
+    padding: 35px;
+    margin-left: 260px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.topbar p {
+    margin-top: 6px;
+    color: #94a3b8;
+}
+
+.export-btn {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    background: #8b5cf6;
+    color: white;
+    cursor: pointer;
+}
+
+.webtoon-scroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    padding-bottom: 60px;
+}
+
+.webtoon-panel {
+    width: 100%;
+    max-width: 700px;
+    background: #1e293b;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .08);
+}
+
+.panel-image {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 90px;
+    background: linear-gradient(135deg, #312e81, #1e293b, #0f172a);
+}
+
+.panel-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.panel-info {
+    padding: 20px 24px;
+}
+
+.panel-info h3 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.panel-info p {
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 14px;
+}
+
+.scene-meta {
+    display: flex;
+    gap: 20px;
+    color: #94a3b8;
+    font-size: 15px;
+    flex-wrap: wrap;
+}
+
+.panel-characters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.character-chip {
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+}
+
+.dialogue-overlay {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    max-height: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    pointer-events: auto;
+}
+
+.dialogue-overlay::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.dialogue-overlay {
+    scrollbar-width: none;
+}
+
+.speech-bubble {
+    max-width: 75%;
+    background: rgba(255, 255, 255, 0.95);
+    color: #1e293b;
+    padding: 8px 14px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .35);
+    position: relative;
+    font-size: 14px;
+}
+
+.speech-bubble.left {
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+.speech-bubble.right {
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+.speech-bubble .speaker-name {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #8b5cf6;
+    margin-bottom: 4px;
+}
+
+.speech-bubble .line-text {
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.speech-bubble.left::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 20px;
+    border-width: 8px 8px 0 0;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
+}
+
+.speech-bubble.right::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    right: 20px;
+    border-width: 8px 0 0 8px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
+}
+
+.panel-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.panel-header-row h3 {
+    margin-bottom: 0;
+}
+
+.regenerate-btn {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border: 1px solid rgba(139, 92, 246, .4);
+    border-radius: 10px;
+    background: rgba(139, 92, 246, .12);
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.regenerate-btn:hover:not(:disabled) {
+    background: rgba(139, 92, 246, .25);
+}
+
+.regenerate-btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.scene.active {
+    background: #8b5cf6;
+}
+
+@media print {
+    .sidebar,
+    .back-btn,
+    .export-btn,
+    .regenerate-btn,
+    .topbar p {
+        display: none !important;
+    }
+
+    .workspace {
+        margin-left: 0 !important;
+        padding: 0 !important;
+    }
+
+    .webtoon-panel,
+    .storyboard-frame {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}

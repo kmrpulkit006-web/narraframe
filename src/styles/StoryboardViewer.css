@@ -10,14 +10,15 @@
 }
 
 .sidebar{
-
     width:260px;
-
     padding:30px;
-
     background:#111827;
-
     border-right:1px solid rgba(255,255,255,.08);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 .sidebar h2{
@@ -55,7 +56,7 @@
 .workspace{
 
     flex:1;
-
+    margin-left: 260px;
     padding:35px;
 }
 
@@ -257,4 +258,106 @@
     transform:translateY(-6px);
 
     box-shadow:0 30px 55px rgba(0,0,0,.45);
+}
+
+.frame-image {
+    position: relative;
+}
+
+.dialogue-overlay {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    max-height: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    pointer-events: auto;
+}
+
+.dialogue-overlay::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.dialogue-overlay {
+    scrollbar-width: none;
+}
+
+.speech-bubble {
+    max-width: 75%;
+    background: rgba(255, 255, 255, 0.95);
+    color: #1e293b;
+    padding: 8px 14px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .35);
+    position: relative;
+    font-size: 14px;
+}
+
+.speech-bubble.left {
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+.speech-bubble.right {
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+.speech-bubble .speaker-name {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #8b5cf6;
+    margin-bottom: 4px;
+}
+
+.speech-bubble .line-text {
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.speech-bubble.left::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 20px;
+    border-width: 8px 8px 0 0;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
+}
+
+.speech-bubble.right::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    right: 20px;
+    border-width: 8px 0 0 8px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
+}
+
+@media print {
+    .sidebar,
+    .back-btn,
+    .export-btn,
+    .regenerate-btn,
+    .topbar p {
+        display: none !important;
+    }
+
+    .workspace {
+        margin-left: 0 !important;
+        padding: 0 !important;
+    }
+
+    .webtoon-panel,
+    .storyboard-frame {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
 }

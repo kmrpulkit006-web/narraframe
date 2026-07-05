@@ -158,3 +158,60 @@
 
     transition: .3s;
 }
+
+.duplicate-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.duplicate-modal {
+    max-width: 480px;
+    width: 100%;
+    background: #1e293b;
+    border: 1px solid rgba(139, 92, 246, .3);
+    border-radius: 20px;
+    padding: 32px;
+}
+
+.duplicate-modal h3 {
+    font-size: 22px;
+    margin-bottom: 14px;
+}
+
+.duplicate-modal p {
+    color: #b8c0d0;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.duplicate-modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.duplicate-modal-actions button {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(139, 92, 246, .35);
+    background: rgba(139, 92, 246, .15);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.duplicate-modal-actions button:hover {
+    background: rgba(139, 92, 246, .3);
+}
+
+.duplicate-cancel {
+    background: rgba(255, 255, 255, .05) !important;
+    border-color: rgba(255, 255, 255, .15) !important;
+}

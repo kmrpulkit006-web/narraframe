@@ -1,16 +1,36 @@
 import "../styles/StoryboardViewer.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 
 
+
+
 function StoryboardViewer({ storyboard }) {
+
+
+
+    let savedStoryboard = null;
+    try {
+        const raw = localStorage.getItem("storyboard");
+        savedStoryboard = raw ? JSON.parse(raw) : null;
+    } catch (err) {
+        console.error("Failed to parse saved storyboard:", err);
+    }
+
+    storyboard = storyboard || savedStoryboard;
     const navigate = useNavigate();
+    const [currentScene, setCurrentScene] = useState(0);
+    const [imageFailed, setImageFailed] = useState(false);
+
+    useEffect(() => {
+        setImageFailed(false);
+    }, [currentScene]);
+
     if (!storyboard) {
         return <div style={{ color: "white", padding: "40px" }}>No storyboard found</div>;
     }
-    const [currentScene, setCurrentScene] = useState(0);
 
     return (
 
@@ -46,13 +66,22 @@ function StoryboardViewer({ storyboard }) {
 
                         <h1>Project: {storyboard.project}</h1>
 
-                        <p>4 Scenes • Generated just now</p>
+                        <p>{storyboard.scenes.length} Scenes • Generated just now</p>
 
                     </div>
 
-                    <button className="export-btn">
-                        Export PDF
-                    </button>
+                    <div style={{ display: "flex", gap: "12px" }}>
+                        <button
+                            className="export-btn"
+                            onClick={() => navigate("/manhwa")}
+                        >
+                            📖 Manhwa View
+                        </button>
+
+                        <button className="export-btn" onClick={() => window.print()}>
+                            Export PDF
+                        </button>
+                    </div>
 
                 </div>
 
@@ -67,7 +96,39 @@ function StoryboardViewer({ storyboard }) {
                     <div className="storyboard-frame">
 
                         <div className="frame-image">
-                            🎨
+
+                            {storyboard.scenes[currentScene].image && !imageFailed ? (
+                                <img
+                                    src={storyboard.scenes[currentScene].image}
+                                    alt="Scene"
+                                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                                    onError={(e) => {
+                                        console.error("Image failed to load:", e.target.src);
+                                        setImageFailed(true);
+                                    }}
+                                />
+                            ) : (
+                                "🎬"
+                            )}
+
+                            {storyboard.scenes[currentScene].dialogue &&
+                                storyboard.scenes[currentScene].dialogue.filter(d => d.line && d.line.trim() !== "").length > 0 && (
+                                    <div className="dialogue-overlay">
+                                        {storyboard.scenes[currentScene].dialogue.filter(d => d.line && d.line.trim() !== "").map((line, index) => (
+                                            <motion.div
+                                                key={index}
+                                                className={`speech-bubble ${index % 2 === 0 ? "left" : "right"}`}
+                                                initial={{ opacity: 0, scale: 0.8 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                transition={{ delay: 0.3 + index * 0.25, duration: 0.3 }}
+                                            >
+                                                <span className="speaker-name">{line.speaker}</span>
+                                                <span className="line-text">{line.line}</span>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                )}
+
                         </div>
 
                         <div className="frame-info">
@@ -125,4 +186,8 @@ function StoryboardViewer({ storyboard }) {
 
 }
 
+
+
 export default StoryboardViewer;
+
+

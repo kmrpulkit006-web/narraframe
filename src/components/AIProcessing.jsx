@@ -76,19 +76,11 @@ function AIProcessing({ currentStep }) {
                         <div className="timeline-icon">
 
                             {index < currentStep ? (
-
-                                <div className="check">
-                                    ✓
-                                </div>
-
+                                <div className="check-icon">✓</div>
                             ) : index === currentStep ? (
-
                                 <div className="spinner"></div>
-
                             ) : (
-
-                                <div className="pending"></div>
-
+                                <div className="pending-circle"></div>
                             )}
 
                         </div>
