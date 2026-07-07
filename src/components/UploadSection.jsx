@@ -11,6 +11,7 @@ import { saveProject, getAllProjects } from "../utils/db";
 import { isLoggedIn, getUser } from "../utils/auth";
 import { getCachedImage, setCachedImage, buildCacheKey } from "../utils/imageCache";
 import { extractTextFromFile } from "../utils/fileParsers";
+import { buildApiUrl } from "../utils/api";
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -58,7 +59,7 @@ function UploadSection({ setStoryboard }) {
         try {
             setLoading(true);
 
-            const res = await fetch("http://localhost:5000/storyboard", {
+            const res = await fetch(buildApiUrl("/storyboard"), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ story })
@@ -114,7 +115,7 @@ function UploadSection({ setStoryboard }) {
                 }
                 setGenCached(false);
 
-                const refRes = await fetch("http://localhost:5000/generate-image", {
+                const refRes = await fetch(buildApiUrl("/generate-image"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ character, seed: projectSeed })
@@ -151,7 +152,7 @@ function UploadSection({ setStoryboard }) {
                 }
                 setGenCached(false);
 
-                const imageRes = await fetch("http://localhost:5000/generate-image", {
+                const imageRes = await fetch(buildApiUrl("/generate-image"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ scene, characters: parsed.characters, seed: projectSeed })

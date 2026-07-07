@@ -12,7 +12,10 @@ const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.use("/generated", express.static(path.join(__dirname, "public", "generated")));
 
-app.use(cors());
+app.use(cors({
+  origin: ["https://narraframe.vercel.app", "http://localhost:5173"],
+  credentials: true
+}));
 app.use(express.json());
 app.use("/storyboard", storyboardRoute);
 app.use("/generate-image", imageRoutes);
@@ -24,7 +27,7 @@ app.get("/", (req, res) => {
   });
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

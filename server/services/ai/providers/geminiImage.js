@@ -32,7 +32,8 @@ function saveImageAndGetUrl(base64Data, mimeType) {
     const filename = `${Date.now()}-${Math.floor(Math.random() * 1e6)}.${ext}`;
     const filepath = path.join(GENERATED_DIR, filename);
     fs.writeFileSync(filepath, Buffer.from(base64Data, "base64"));
-    return `${import.meta.env.VITE_API_URL}/generated/${filename}`;
+    const apiBaseUrl = process.env.VITE_API_URL || process.env.API_BASE_URL || "http://localhost:5000";
+    return `${apiBaseUrl.replace(/\/$/, "")}/generated/${filename}`;
 }
 
 export async function generateGeminiImage(prompt, referenceImageUrls = []) {

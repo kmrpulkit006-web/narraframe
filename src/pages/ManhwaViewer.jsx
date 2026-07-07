@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { updateProjectData } from "../utils/db";
 import { isLoggedIn } from "../utils/auth";
+import { buildApiUrl } from "../utils/api";
 
 function loadInitialBoard(storyboard) {
     if (storyboard) return storyboard;
@@ -60,7 +61,7 @@ function ManhwaViewer({ storyboard }) {
         const variedSeed = board.seed + Math.floor(Math.random() * 100000) + 1;
 
         try {
-            const res = await fetch("http://localhost:5000/generate-image", {
+            const res = await fetch(buildApiUrl("/generate-image"), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
