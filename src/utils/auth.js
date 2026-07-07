@@ -1,5 +1,5 @@
-const TOKEN_KEY = "narraframe_token";
-const USER_KEY = "narraframe_user";
+const TOKEN_KEY = "scriptoonai_token";
+const USER_KEY = "scriptoonai_user";
 
 export function saveSession(token, user) {
     localStorage.setItem(TOKEN_KEY, token);
