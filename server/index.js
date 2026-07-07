@@ -6,6 +6,7 @@ import imageRoutes from "./routes/image.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
+import projectsRoutes from "./routes/projects.js";
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use("/storyboard", storyboardRoute);
 app.use("/generate-image", imageRoutes);
 app.use("/auth", authRoutes);
+app.use("/projects", projectsRoutes);
 
 app.get("/", (req, res) => {
   res.json({
