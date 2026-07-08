@@ -5,7 +5,6 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY_2 });
 
 async function urlToInlinePart(url) {
@@ -23,15 +22,30 @@ async function urlToInlinePart(url) {
     };
 }
 
-import { v2 as cloudinary } from "cloudinary";
+let cloudinary = null;
 
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+try {
+    const cloudinaryModule = await import("cloudinary");
+    cloudinary = cloudinaryModule.v2;
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+} catch (error) {
+    console.warn("Cloudinary unavailable, falling back to local file storage:", error.message);
+}
 
 async function saveImageAndGetUrl(base64Data, mimeType) {
+    if (!cloudinary) {
+        const ext = (mimeType.split("/")[1] || "png").split("+")[0];
+        const filename = `${Date.now()}-${Math.floor(Math.random() * 1e6)}.${ext}`;
+        const filepath = path.join(__dirname, "..", "..", "..", "public", "generated", filename);
+        fs.mkdirSync(path.dirname(filepath), { recursive: true });
+        fs.writeFileSync(filepath, Buffer.from(base64Data, "base64"));
+        return `https://scriptoonai.onrender.com/generated/${filename}`;
+    }
+
     const uploadResult = await cloudinary.uploader.upload(
         `data:${mimeType};base64,${base64Data}`,
         { folder: "scriptoonai-generated" }
